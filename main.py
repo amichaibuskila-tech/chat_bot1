@@ -8,6 +8,7 @@ from azure.core.credentials import AzureKeyCredential
 import os
 from dotenv import load_dotenv
 
+
 load_dotenv()
 token = os.getenv("GITHUB_TOKEN")
 
@@ -25,7 +26,19 @@ def get_completion_from_messages(messages, model="gpt-4o-mini", temperature=0):
     return response.choices[0].message.content
 
 context = [
-    {'role': 'system', 'content': 'you are a helpful assistant.'},
+    {'role': 'system', 'content': 
+        '''
+        you need to guess which person the user thinking
+        you can ask the user some question to get more information about the person,
+        but you can only ask 20 question, after that you need to guess the person, 
+        if you guess wrong, you will lose, if you guess right, you will win
+        
+        Ask focused questions before you know the answer for sure, then try to guess.
+        
+        Yes or no question.
+        '''
+        
+        },
 ]
 
 def run_chat():
@@ -49,3 +62,5 @@ def run_chat():
             
 if __name__ == "__main__":
     run_chat()
+    
+    
